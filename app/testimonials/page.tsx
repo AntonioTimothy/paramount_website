@@ -18,7 +18,7 @@ export default function Testimonials() {
       name: "Mary Wanjiru",
       company: "Wanjiru Properties",
       role: "Director",
-      text: "We were impressed with the quality of work and the team's commitment to safety. Highly recommended for any construction project.",
+      text: "We were impressed with the quality of work and the team's commitment to safety. Highly recommended for any construction and interior designing project.",
       rating: 5,
       location: "Kiambu, Kenya",
     },

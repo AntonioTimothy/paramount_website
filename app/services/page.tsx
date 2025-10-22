@@ -145,7 +145,7 @@ export default function Services() {
                   </div>
 
                   <Button asChild className="bg-primary hover:bg-primary-dark text-white">
-                    <Link href="/contact">Get a Quotation</Link>
+                    <Link href="/contact">Contac us</Link>
                   </Button>
                 </div>
 
