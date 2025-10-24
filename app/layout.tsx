@@ -1,34 +1,21 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import ChatWidget from "@/components/chat-widget"
 import PageLoader from "@/components/page-loader"
 
-// Safe font loading with error handling
-let geistSans: any = { className: '', variable: '' }
-let geistMono: any = { variable: '' }
+const geistSans = Geist({ 
+  subsets: ["latin"],
+  variable: '--font-geist-sans'
+})
 
-try {
-  // Dynamic import to avoid build-time issues
-  const fontModule = require("next/font/google")
-  if (fontModule.Geist && fontModule.Geist_Mono) {
-    geistSans = fontModule.Geist({
-      subsets: ["latin"],
-      variable: '--font-geist-sans',
-      display: 'swap',
-    })
-    geistMono = fontModule.Geist_Mono({
-      subsets: ["latin"],
-      variable: '--font-geist-mono', 
-      display: 'swap',
-    })
-  }
-} catch (error) {
-  // Fallback to system fonts if Google fonts fail
-  console.warn('Google Fonts not available, using system fonts')
-}
+const geistMono = Geist_Mono({ 
+  subsets: ["latin"],
+  variable: '--font-geist-mono'
+})
 
 export const metadata: Metadata = {
   title: "Paramount Top-Tier Limited | Construction Excellence in Kenya",

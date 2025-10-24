@@ -20,7 +20,6 @@ import {
   Building2,
   ChevronLeft,
   ChevronRight,
-  Home,
   Factory,
   Wrench,
   Palette,
