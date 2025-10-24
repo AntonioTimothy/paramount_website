@@ -129,12 +129,12 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       ]
     },
     "4": {
-      title: "Nine West Commercial Complex",
+      title: "9West Commercial Complex",
       category: "Commercial",
       year: "2010-2011",
-      location: "Ngong Road, Nairobi",
+      location: "Westlands Road, Nairobi",
       description: "High-end commercial retail space designed for premium brands and modern businesses",
-      fullDescription: "Located on the prestigious Ngong Road, this commercial complex features high-end retail spaces designed for premium brands and businesses. The project showcases our ability to deliver sophisticated commercial spaces that combine aesthetic appeal with functional design. The complex has become a popular destination for upscale retail and professional services, featuring modern amenities and excellent accessibility.",
+      fullDescription: "Located on the prestigious Westlands, this commercial complex features high-end retail spaces designed for premium brands and businesses. The project showcases our ability to deliver sophisticated commercial spaces that combine aesthetic appeal with functional design. The complex has become a popular destination for upscale retail and professional services, featuring modern amenities and excellent accessibility.",
       images: [
         "/9west.jpg",
       ],
