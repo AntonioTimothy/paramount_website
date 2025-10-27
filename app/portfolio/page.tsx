@@ -36,7 +36,7 @@ export default function Portfolio() {
     },
     
     {
-      id: 2,
+      id: 6,
       title: "Civil Servants Housing Scheme",
       category: "residential",
       year: "2019-2023",

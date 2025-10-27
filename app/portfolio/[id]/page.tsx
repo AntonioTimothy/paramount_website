@@ -25,9 +25,9 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
   const projects: Record<string, any> = {
    
     "12": {
-      title: "Civil Servants Housing Scheme",
+      title: "Mount Sinai - Kinoo",
       category: "Residential",
-      year: "2019-2023",
+      year: "2024-ongoing",
       location: "Kiambu, Kenya",
       description: "Large-scale residential housing development featuring modern architecture and premium amenities",
       fullDescription: "This large-scale residential housing scheme in Kiambu, Kenya, showcases our ability to manage complex multi-unit residential projects. The development features modern architecture, quality construction, and excellent finishing. Each unit was designed with attention to detail, providing comfortable living spaces with all modern conveniences in a secure and well-planned community environment.",
@@ -42,6 +42,27 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
        
 
       ],
+      "6": {
+        title: "Civil Servants Housing Scheme",
+        category: "Residential",
+        year: "2017-2023",
+        location: "Kiambu, Kenya",
+        description: "Large-scale residential housing development featuring modern architecture and premium amenities",
+        fullDescription: "This large-scale residential housing scheme in Kiambu, Kenya, showcases our ability to manage complex multi-unit residential projects. The development features modern architecture, quality construction, and excellent finishing. Each unit was designed with attention to detail, providing comfortable living spaces with all modern conveniences in a secure and well-planned community environment.",
+        images: [
+          "/civil1.jpg",
+          "/civil2.jpg",
+          "/civil3.jpg",
+          "/civil4.jpg",
+          "/civil5.jpg",
+          "/civil6.jpg",
+          "/civil7.jpg",
+          "/civil8.jpg",
+  
+  
+         
+  
+        ],
       features: [
         "Multiple residential units with varied designs",
         "Modern architectural design with aesthetic appeal",
@@ -64,7 +85,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       ]
     },
 
-    "2": {
+    "1": {
       title: "South Sudan School Dormitory",
       category: "Residential",
       year: "2005",
@@ -191,41 +212,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         "Zero defect handover"
       ]
     },
-    "6": {
-      title: "Civil Servants Housing - Kiambu",
-      category: "Residential",
-      year: "2017-2022",
-      location: "Kiambu",
-      description: "Flagship large-scale residential housing development showcasing long-term project excellence",
-      fullDescription: "This large-scale residential housing development in Kiambu represents our flagship project, showcasing our expertise in managing complex, long-term residential construction projects. The development features modern housing units with contemporary designs, quality construction, and comprehensive community amenities. This project demonstrates our commitment to sustainable development and creating living spaces that enhance quality of life for residents.",
-      images: [
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-17%20at%2014.21.15_39bf50ed-W0OPYHHFkbu4On4sXGHaQCfYOmOy1v.jpg",
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-17%20at%2014.18.26_94576768-RqTFoMXoyluNrAEhIdsXYmIReMcxMW.jpg",
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-17%20at%2014.18.27_8334c472-UxPxwgcZ3N0sCRUhzpXMJYKHm5ubnz.jpg",
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-17%20at%2014.20.56_52791fca-DvXwqbhQqqxdMxW4YZsAsjDidJKRG6.jpg",
-      ],
-      features: [
-        "Multiple residential unit designs and sizes",
-        "Contemporary architectural design",
-        "Quality construction with premium materials",
-        "Professional project management team",
-        "Excellent finishes and modern amenities"
-      ],
-      stats: {
-        area: "20,000 m²",
-        budget: "Confidential",
-        team: "60+ professionals",
-        duration: "60 months",
-        units: "50+ housing units",
-        amenities: "Park, playground, security"
-      },
-      achievements: [
-        "Largest residential project to date",
-        "NCA 4 certified excellence",
-        "98% resident satisfaction"
-      ]
-    },
-  }
+    
 
   const project = projects[params.id]
 
