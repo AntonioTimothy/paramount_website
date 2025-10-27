@@ -41,7 +41,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
        
 
-      ],
+      ]},
       "6": {
         title: "Civil Servants Housing Scheme",
         category: "Residential",
@@ -58,10 +58,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
           "/civil6.jpg",
           "/civil7.jpg",
           "/civil8.jpg",
-  
-  
-         
-  
         ],
       features: [
         "Multiple residential units with varied designs",
@@ -212,6 +208,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         "Zero defect handover"
       ]
     },
+  }
     
 
   const project = projects[params.id]
