@@ -24,7 +24,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
   const projects: Record<string, any> = {
    
-    "12": {
+    "7": {
       title: "Mount Sinai - Kinoo",
       category: "Residential",
       year: "2024-ongoing",
@@ -38,10 +38,8 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         "/kinoo4.jpg",
         "/kinoo5.jpg",
         "/kinoo6.jpg",
-
-       
-
-      ]},
+      ]
+    },
       "6": {
         title: "Civil Servants Housing Scheme",
         category: "Residential",

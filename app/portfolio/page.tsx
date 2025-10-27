@@ -20,7 +20,7 @@ export default function Portfolio() {
   const projects = [
 
     {
-      id: 12,
+      id: 7,
       title: "Mount Sinai - Kinoo",
       category: "residential",
       year: "2024-ongoing",
