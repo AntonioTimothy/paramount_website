@@ -19,11 +19,17 @@ import {
   Home
 } from "lucide-react"
 
-export default function PortfolioDetail({ params }: { params: { id: string } }) {
+export default function PortfolioDetail({ params }: { params: Promise<{ id: string }> }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  // Initialize with empty object and then update when params resolve
+  const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null)
+
+  // Resolve params when component mounts
+  useState(() => {
+    params.then(setResolvedParams)
+  })
 
   const projects: Record<string, any> = {
-   
     "7": {
       title: "Mount Sinai - Kinoo",
       category: "Residential",
@@ -40,23 +46,23 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         "/kinoo6.jpg",
       ]
     },
-      "6": {
-        title: "Civil Servants Housing Scheme",
-        category: "Residential",
-        year: "2017-2023",
-        location: "Kiambu, Kenya",
-        description: "Large-scale residential housing development featuring modern architecture and premium amenities",
-        fullDescription: "This large-scale residential housing scheme in Kiambu, Kenya, showcases our ability to manage complex multi-unit residential projects. The development features modern architecture, quality construction, and excellent finishing. Each unit was designed with attention to detail, providing comfortable living spaces with all modern conveniences in a secure and well-planned community environment.",
-        images: [
-          "/civil1.jpg",
-          "/civil2.jpg",
-          "/civil3.jpg",
-          "/civil4.jpg",
-          "/civil5.jpg",
-          "/civil6.jpg",
-          "/civil7.jpg",
-          "/civil8.jpg",
-        ],
+    "6": {
+      title: "Civil Servants Housing Scheme",
+      category: "Residential",
+      year: "2017-2023",
+      location: "Kiambu, Kenya",
+      description: "Large-scale residential housing development featuring modern architecture and premium amenities",
+      fullDescription: "This large-scale residential housing scheme in Kiambu, Kenya, showcases our ability to manage complex multi-unit residential projects. The development features modern architecture, quality construction, and excellent finishing. Each unit was designed with attention to detail, providing comfortable living spaces with all modern conveniences in a secure and well-planned community environment.",
+      images: [
+        "/civil1.jpg",
+        "/civil2.jpg",
+        "/civil3.jpg",
+        "/civil4.jpg",
+        "/civil5.jpg",
+        "/civil6.jpg",
+        "/civil7.jpg",
+        "/civil8.jpg",
+      ],
       features: [
         "Multiple residential units with varied designs",
         "Modern architectural design with aesthetic appeal",
@@ -78,7 +84,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
         "Zero budget overruns"
       ]
     },
-
     "1": {
       title: "South Sudan School Dormitory",
       category: "Residential",
@@ -183,7 +188,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       fullDescription: "This government office complex in Ndaragwa was built to the highest standards, featuring modern office spaces and professional facilities suitable for government operations. The project demonstrates our capability to handle government contracts with strict compliance requirements and attention to detail. The complex includes administrative offices, meeting rooms, and support facilities designed for efficient public service delivery.",
       images: [
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-10-17%20at%2014.18.27_8334c472-UxPxwgcZ3N0sCRUhzpXMJYKHm5ubnz.jpg",
-       
       ],
       features: [
         "Government-standard construction quality",
@@ -207,9 +211,22 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
       ]
     },
   }
-    
 
-  const project = projects[params.id]
+  // Show loading state while params are being resolved
+  if (!resolvedParams) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center animate-pulse">
+            <Building2 className="w-8 h-8 text-slate-400" />
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900 mb-4">Loading Project...</h1>
+        </div>
+      </div>
+    )
+  }
+
+  const project = projects[resolvedParams.id]
 
   if (!project) {
     return (
@@ -297,7 +314,7 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
 
               <h3 className="text-2xl font-bold text-slate-900 mb-6">Key Features</h3>
               <ul className="space-y-4 mb-8">
-                {project.features.map((feature: string, i: number) => (
+                {project.features?.map((feature: string, i: number) => (
                   <li key={i} className="flex items-start gap-3 text-slate-700">
                     <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -355,23 +372,23 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
                       <Ruler className="w-5 h-5 text-blue-600" />
                       <span className="text-slate-700">Project Area</span>
                     </div>
-                    <span className="font-semibold text-slate-900">{project.stats.area}</span>
+                    <span className="font-semibold text-slate-900">{project.stats?.area}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Clock className="w-5 h-5 text-blue-600" />
                       <span className="text-slate-700">Duration</span>
                     </div>
-                    <span className="font-semibold text-slate-900">{project.stats.duration}</span>
+                    <span className="font-semibold text-slate-900">{project.stats?.duration}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-blue-600" />
                       <span className="text-slate-700">Team Size</span>
                     </div>
-                    <span className="font-semibold text-slate-900">{project.stats.team}</span>
+                    <span className="font-semibold text-slate-900">{project.stats?.team}</span>
                   </div>
-                  {project.stats.rooms && (
+                  {project.stats?.rooms && (
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <Home className="w-5 h-5 text-blue-600" />
@@ -419,8 +436,6 @@ export default function PortfolioDetail({ params }: { params: { id: string } }) 
           </div>
         </div>
       </section>
-
-    
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white relative overflow-hidden">
