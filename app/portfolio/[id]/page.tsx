@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { 
@@ -16,19 +16,18 @@ import {
   Award,
   Star,
   Building2,
-  Home,
-  X
+  Home
 } from "lucide-react"
 
 export default function PortfolioDetail({ params }: { params: Promise<{ id: string }> }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  // Initialize with empty object and then update when params resolve
   const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null)
 
   // Resolve params when component mounts
-  useEffect(() => {
+  useState(() => {
     params.then(setResolvedParams)
-  }, [params])
+  })
 
   const projects: Record<string, any> = {
     "7": {
@@ -254,33 +253,6 @@ export default function PortfolioDetail({ params }: { params: Promise<{ id: stri
     setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length)
   }
 
-  const openGallery = (index: number) => {
-    setCurrentImageIndex(index)
-    setIsGalleryOpen(true)
-  }
-
-  const closeGallery = () => {
-    setIsGalleryOpen(false)
-  }
-
-  // Handle keyboard navigation in gallery
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isGalleryOpen) return
-
-      if (e.key === 'Escape') {
-        closeGallery()
-      } else if (e.key === 'ArrowRight') {
-        nextImage()
-      } else if (e.key === 'ArrowLeft') {
-        prevImage()
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isGalleryOpen, currentImageIndex, project.images.length])
-
   return (
     <div className="overflow-hidden pt-20">
       {/* Hero Gallery Section */}
@@ -372,8 +344,8 @@ export default function PortfolioDetail({ params }: { params: Promise<{ id: stri
                 {project.images.map((image: string, i: number) => (
                   <button
                     key={i}
-                    onClick={() => openGallery(i)}
-                    className={`relative h-32 rounded-xl overflow-hidden border-2 transition-all duration-300 group ${
+                    onClick={() => setCurrentImageIndex(i)}
+                    className={`relative h-32 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                       currentImageIndex === i 
                         ? "border-blue-500 ring-2 ring-blue-200" 
                         : "border-slate-200 hover:border-blue-300"
@@ -382,13 +354,8 @@ export default function PortfolioDetail({ params }: { params: Promise<{ id: stri
                     <img
                       src={image || "/placeholder.svg"}
                       alt={`${project.title} - View ${i + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-2">
-                        <ChevronRight size={16} className="text-slate-700" />
-                      </div>
-                    </div>
                   </button>
                 ))}
               </div>
@@ -501,69 +468,6 @@ export default function PortfolioDetail({ params }: { params: Promise<{ id: stri
           </div>
         </div>
       </section>
-
-      {/* Full Screen Gallery Modal */}
-      {isGalleryOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center">
-          {/* Close Button */}
-          <button
-            onClick={closeGallery}
-            className="absolute top-6 right-6 z-60 text-white hover:bg-white/20 p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            <X size={32} />
-          </button>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevImage}
-            className="absolute left-6 top-1/2 -translate-y-1/2 z-60 bg-white/20 hover:bg-white/40 text-white p-4 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            <ChevronLeft size={40} />
-          </button>
-          
-          <button
-            onClick={nextImage}
-            className="absolute right-6 top-1/2 -translate-y-1/2 z-60 bg-white/20 hover:bg-white/40 text-white p-4 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            <ChevronRight size={40} />
-          </button>
-
-          {/* Main Image */}
-          <div className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center p-8">
-            <img
-              src={project.images[currentImageIndex] || "/placeholder.svg"}
-              alt={`${project.title} - View ${currentImageIndex + 1}`}
-              className="max-w-full max-h-full object-contain rounded-lg"
-            />
-          </div>
-
-          {/* Image Counter */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-60 text-white text-lg bg-black/60 backdrop-blur-sm px-6 py-3 rounded-full">
-            {currentImageIndex + 1} / {project.images.length}
-          </div>
-
-          {/* Thumbnail Strip */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-60 flex gap-2 max-w-full overflow-x-auto px-4 py-2">
-            {project.images.map((image: string, i: number) => (
-              <button
-                key={i}
-                onClick={() => setCurrentImageIndex(i)}
-                className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                  currentImageIndex === i 
-                    ? "border-blue-500 ring-2 ring-blue-300" 
-                    : "border-white/30 hover:border-white/60"
-                }`}
-              >
-                <img
-                  src={image || "/placeholder.svg"}
-                  alt={`Thumbnail ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
